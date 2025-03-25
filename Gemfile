@@ -1,9 +1,10 @@
 source "https://rubygems.org"
-ruby RUBY_VERSION
+ruby '3.4.2'
 
 gem "rake"
-gem "jekyll", "4.1.1"
-gem "html-proofer", "3.15.0"
+gem "jekyll", "4.4.0"
+gem "html-proofer", "5.0.9"
+gem "sass-embedded", "1.78.0"
 
 group :jekyll_plugins do
   gem "rouge", "3.22.0"
@@ -24,9 +25,7 @@ group :jekyll_plugins do
   gem "jekyll-optional-front-matter", "0.3.2"
   gem "jekyll-readme-index", "0.3.0"
   gem "jekyll-titles-from-headings", "0.5.3"
-  git 'https://github.com/benbalter/jekyll-default-layout.git', ref: "11054b8" do
-    gem "jekyll-default-layout"
-  end
+  gem "jekyll-default-layout", "0.1.5"
 
-  gem "just-the-docs", "0.3.1"
+  gem "just-the-docs", "0.10.1"
 end
