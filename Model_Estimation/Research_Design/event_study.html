@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <link rel="stylesheet" href="/assets/css/just-the-docs-default.css">
+  <link rel="stylesheet" href="/assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+  <style id="jtd-nav-activation">
+    .site-nav > ul.nav-list:first-child > li > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li > ul > li:not(:nth-child(2)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li > ul > li > ul > li a {
+      background-image: none;
+    }
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+    .site-nav > ul.nav-list:first-child > li:nth-child(4) > ul > li:nth-child(5) > ul > li:nth-child(2) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(4) > button svg,
+    .site-nav > ul.nav-list:first-child > li:nth-child(4) > ul > li:nth-child(5) > button svg,
+    .site-nav > ul.nav-list:first-child > li:nth-child(4) > ul > li:nth-child(5) > ul > li:nth-child(2) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(4) > ul.nav-list,
+    .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(4) > ul.nav-list > li.nav-list-item:nth-child(5) > ul.nav-list,
+    .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(4) > ul.nav-list > li.nav-list-item:nth-child(5) > ul.nav-list > li.nav-list-item:nth-child(2) > ul.nav-list {
+      display: block;
+    }
+  </style>
+    <script src="/assets/js/vendor/lunr.min.js"></script>
+  <script src="/assets/js/just-the-docs.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Difference in Differences Event Study | LOST</title>
+<meta name="generator" content="Jekyll v4.4.0" />
+<meta property="og:title" content="Difference in Differences Event Study" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="LOST" />
+<script type="application/ld+json">
+{"url":"/Model_Estimation/Research_Design/event_study.html","@type":"WebPage","headline":"Difference in Differences Event Study","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "AMS" } } });
+  </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML">
+  </script>
+</head>
+<body>
+  <a class="skip-to-main" href="#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+</svg>
+    <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="/" class="site-title lh-tight">
+  LOST
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Toggle menu" aria-pressed="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+    <ul class="nav-list"><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Data Manipulation category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Data_Manipulation/data_manipulation.html" class="nav-list-link">Data Manipulation</a><ul class="nav-list"><li class="nav-list-item"><a href="/Data_Manipulation/Regular_Expressions.html" class="nav-list-link">Regular Expressions</a></li><li class="nav-list-item"><a href="/Data_Manipulation/collapse_a_data_set.html" class="nav-list-link">Collapse a Data Set</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Combining Datasets category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Data_Manipulation/Combining_Datasets/combining_datasets_overview.html" class="nav-list-link">Combining Datasets</a><ul class="nav-list"><li class="nav-list-item"><a href="/Data_Manipulation/Combining_Datasets/combining_datasets_vertical_combination.html" class="nav-list-link">Vertical Combination</a></li><li class="nav-list-item"><a href="/Data_Manipulation/Combining_Datasets/combining_datasets_horizontal_merge_deterministic.html" class="nav-list-link">Horizontal Combination (Deterministic)</a></li></ul></li><li class="nav-list-item"><a href="/Data_Manipulation/creating_a_variable_with_group_calculations.html" class="nav-list-link">Creating a Variable with Group Calculations</a></li><li class="nav-list-item"><a href="/Data_Manipulation/creating_categorical_variables.html" class="nav-list-link">Creating Categorical Variables</a></li><li class="nav-list-item"><a href="/Data_Manipulation/Creating_Dummy_Variables/creating_dummy_variables.html" class="nav-list-link">Creating Dummy Variables</a></li><li class="nav-list-item"><a href="/Data_Manipulation/determine_the_observation_level_of_a_data_set.html" class="nav-list-link">Determine the Observation Level of a Data Set</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Reshaping Data category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Data_Manipulation/Reshaping/reshape.html" class="nav-list-link">Reshaping Data</a><ul class="nav-list"><li class="nav-list-item"><a href="/Data_Manipulation/Reshaping/reshape_panel_data_from_wide_to_long.html" class="nav-list-link">Reshape Panel Data from Wide to Long</a></li><li class="nav-list-item"><a href="/Data_Manipulation/Reshaping/reshape_panel_data_from_long_to_wide.html" class="nav-list-link">Reshape Panel Data from Long to Wide</a></li></ul></li><li class="nav-list-item"><a href="/Data_Manipulation/rowwise_calculations.html" class="nav-list-link">Rowwise Calculations</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Geo-Spatial category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Geo-Spatial/Geo-spatial.html" class="nav-list-link">Geo-Spatial</a><ul class="nav-list"><li class="nav-list-item"><a href="/Geo-Spatial/choropleths.html" class="nav-list-link">Choropleths</a></li><li class="nav-list-item"><a href="/Geo-Spatial/geocoding.html" class="nav-list-link">Geocoding</a></li><li class="nav-list-item"><a href="/Geo-Spatial/handling_raster_data.html" class="nav-list-link">Handling Raster Data</a></li><li class="nav-list-item"><a href="/Geo-Spatial/merging_shape_files.html" class="nav-list-link">Merging Shape Files</a></li><li class="nav-list-item"><a href="/Geo-Spatial/spatial_joins.html" class="nav-list-link">Spatial Joins</a></li><li class="nav-list-item"><a href="/Geo-Spatial/spatial_lag_model.html" class="nav-list-link">Spatial Lag Model</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Machine Learning category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Machine_Learning/Machine_Learning.html" class="nav-list-link">Machine Learning</a><ul class="nav-list"><li class="nav-list-item"><a href="/Machine_Learning/Nearest_Neighbor.html" class="nav-list-link">K-Nearest Neighbor Matching</a></li><li class="nav-list-item"><a href="/Machine_Learning/artificial_neural_network.html" class="nav-list-link">Artificial Neural Network</a></li><li class="nav-list-item"><a href="/Machine_Learning/boosted_regression_trees.html" class="nav-list-link">Boosted Regression Trees</a></li><li class="nav-list-item"><a href="/Machine_Learning/causal_forest.html" class="nav-list-link">Causal Forest</a></li><li class="nav-list-item"><a href="/Machine_Learning/decision_trees.html" class="nav-list-link">Decision Trees</a></li><li class="nav-list-item"><a href="/Machine_Learning/penalized_regression.html" class="nav-list-link">Penalized Regression</a></li><li class="nav-list-item"><a href="/Machine_Learning/random_forest.html" class="nav-list-link">Random Forest</a></li><li class="nav-list-item"><a href="/Machine_Learning/support_vector_machine.html" class="nav-list-link">Support Vector Machine</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Model Estimation category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Model_Estimation/Model_Estimation.html" class="nav-list-link">Model Estimation</a><ul class="nav-list"><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Ordinary Least Squares category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Model_Estimation/OLS/OLS.html" class="nav-list-link">Ordinary Least Squares</a><ul class="nav-list"><li class="nav-list-item"><a href="/Model_Estimation/OLS/ANOVA.html" class="nav-list-link">ANOVA</a></li><li class="nav-list-item"><a href="/Model_Estimation/OLS/simple_linear_regression.html" class="nav-list-link">Simple Linear Regression</a></li><li class="nav-list-item"><a href="/Model_Estimation/OLS/stepwise_regression.html" class="nav-list-link">Stepwise Regression</a></li><li class="nav-list-item"><a href="/Model_Estimation/OLS/interaction_terms_and_polynomials.html" class="nav-list-link">Interaction Terms and Polynomials</a></li><li class="nav-list-item"><a href="/Model_Estimation/OLS/fixed_effects_in_linear_regression.html" class="nav-list-link">Fixed Effects in Linear Regression</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Matching category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Model_Estimation/Matching/matching.html" class="nav-list-link">Matching</a><ul class="nav-list"><li class="nav-list-item"><a href="/Model_Estimation/Matching/entropy_balancing.html" class="nav-list-link">Entropy Balancing</a></li><li class="nav-list-item"><a href="/Model_Estimation/Matching/propensity_score_matching.html" class="nav-list-link">Propensity Score Matching</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Generalised Least Squares category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Model_Estimation/GLS/GLS.html" class="nav-list-link">Generalised Least Squares</a><ul class="nav-list"><li class="nav-list-item"><a href="/Model_Estimation/GLS/gmm.html" class="nav-list-link">Generalized Method of Moments</a></li><li class="nav-list-item"><a href="/Model_Estimation/GLS/heckman_correction_model.html" class="nav-list-link">Heckman Correction Model</a></li><li class="nav-list-item"><a href="/Model_Estimation/GLS/logit_model.html" class="nav-list-link">Logit Model</a></li><li class="nav-list-item"><a href="/Model_Estimation/GLS/mcfaddens_choice_model.html" class="nav-list-link">McFadden's Choice Model (Alternative-Specific Conditional Logit)</a></li><li class="nav-list-item"><a href="/Model_Estimation/GLS/nested_logit.html" class="nav-list-link">Nested Logit Model</a></li><li class="nav-list-item"><a href="/Model_Estimation/GLS/ordered_probit_logit.html" class="nav-list-link">Ordered Probit/Logit</a></li><li class="nav-list-item"><a href="/Model_Estimation/GLS/probit_model.html" class="nav-list-link">Probit Model</a></li><li class="nav-list-item"><a href="/Model_Estimation/GLS/tobit.html" class="nav-list-link">Tobit Regression</a></li><li class="nav-list-item"><a href="/Model_Estimation/GLS/quantile_regression.html" class="nav-list-link">Quantile Regression</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Multilevel Models category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Model_Estimation/Multilevel_Models/Multilevel_Models.html" class="nav-list-link">Multilevel Models</a><ul class="nav-list"><li class="nav-list-item"><a href="/Model_Estimation/Multilevel_Models/linear_mixed_effects_regression.html" class="nav-list-link">Linear Mixed-Effects Regression</a></li><li class="nav-list-item"><a href="/Model_Estimation/Multilevel_Models/mixed_logit.html" class="nav-list-link">Mixed Logit Model</a></li><li class="nav-list-item"><a href="/Model_Estimation/Multilevel_Models/random_mixed_effects_estimation.html" class="nav-list-link">Random/Mixed Effects in Linear Regression</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Research Design category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Model_Estimation/Research_Design/Research_Design.html" class="nav-list-link">Research Design</a><ul class="nav-list"><li class="nav-list-item"><a href="/Model_Estimation/Research_Design/density_discontinuity_test.html" class="nav-list-link">Density Discontinuity Tests for Regression Discontinuity</a></li><li class="nav-list-item"><a href="/Model_Estimation/Research_Design/event_study.html" class="nav-list-link">Difference in Differences Event Study</a></li><li class="nav-list-item"><a href="/Model_Estimation/Research_Design/instrumental_variables.html" class="nav-list-link">Instrumental Variables</a></li><li class="nav-list-item"><a href="/Model_Estimation/Research_Design/regression_discontinuity_design.html" class="nav-list-link">Regression Discontinuity Design</a></li><li class="nav-list-item"><a href="/Model_Estimation/Research_Design/synthetic_control_method.html" class="nav-list-link">Synthetic Control</a></li><li class="nav-list-item"><a href="/Model_Estimation/Research_Design/two_by_two_difference_in_difference.html" class="nav-list-link">2x2 Difference in Difference</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Statistical Inference category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Model_Estimation/Statistical_Inference/Statistical_Inference.html" class="nav-list-link">Statistical Inference</a><ul class="nav-list"><li class="nav-list-item"><a href="/Model_Estimation/Statistical_Inference/Marginal_Effects_in_Nonlinear_Regression.html" class="nav-list-link">Marginal Effects in Nonlinear Regression</a></li><li class="nav-list-item"><a href="/Model_Estimation/Statistical_Inference/linear_hypothesis_tests.html" class="nav-list-link">Linear Hypothesis Tests</a></li><li class="nav-list-item"><a href="/Model_Estimation/Statistical_Inference/nonlinear_hypothesis_tests.html" class="nav-list-link">Nonlinear Hypothesis Tests</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Nonstandard Errors category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Model_Estimation/Statistical_Inference/Nonstandard_Errors/nonstandard_errors.html" class="nav-list-link">Nonstandard Errors</a><ul class="nav-list"><li class="nav-list-item"><a href="/Model_Estimation/Statistical_Inference/Nonstandard_Errors/bootstrap_se.html" class="nav-list-link">Bootstrap Standard Errors</a></li><li class="nav-list-item"><a href="/Model_Estimation/Statistical_Inference/Nonstandard_Errors/clustered_se.html" class="nav-list-link">Cluster-Robust Standard Errors</a></li><li class="nav-list-item"><a href="/Model_Estimation/Statistical_Inference/Nonstandard_Errors/hc_se.html" class="nav-list-link">Heteroskedasticity-consistent standard errors</a></li></ul></li></ul></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Presentation category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Presentation/Presentation.html" class="nav-list-link">Presentation</a><ul class="nav-list"><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Figures category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Presentation/Figures/Figures.html" class="nav-list-link">Figures</a><ul class="nav-list"><li class="nav-list-item"><a href="/Presentation/Figures/Adding_and_Labeling_a_Reference_Line.html" class="nav-list-link">Adding and Labeling a Reference Line</a></li><li class="nav-list-item"><a href="/Presentation/Figures/Animated_graphs.html" class="nav-list-link">Animated Graphs</a></li><li class="nav-list-item"><a href="/Presentation/Figures/Graph_Annotation.html" class="nav-list-link">Graph Annotations</a></li><li class="nav-list-item"><a href="/Presentation/Figures/Scatterplots.html" class="nav-list-link">Scatterplots</a></li><li class="nav-list-item"><a href="/Presentation/Figures/Styling_Scatterplots.html" class="nav-list-link">Styling Scatterplots</a></li><li class="nav-list-item"><a href="/Presentation/Figures/bar_graphs.html" class="nav-list-link">Bar Graphs</a></li><li class="nav-list-item"><a href="/Presentation/Figures/binscatter.html" class="nav-list-link">Binned Scatterplots</a></li><li class="nav-list-item"><a href="/Presentation/Figures/color_palettes.html" class="nav-list-link">Color Palettes</a></li><li class="nav-list-item"><a href="/Presentation/Figures/density_plots.html" class="nav-list-link">Density Plots</a></li><li class="nav-list-item"><a href="/Presentation/Figures/faceted_graphs.html" class="nav-list-link">Faceted Graphs</a></li><li class="nav-list-item"><a href="/Presentation/Figures/formatting_graph_axes.html" class="nav-list-link">Formatting Graph Axes</a></li><li class="nav-list-item"><a href="/Presentation/Figures/formatting_graph_legends.html" class="nav-list-link">Formatting Graph Legends</a></li><li class="nav-list-item"><a href="/Presentation/Figures/graph_themes.html" class="nav-list-link">Graph Themes</a></li><li class="nav-list-item"><a href="/Presentation/Figures/heatmap_colored_correlation_matrix.html" class="nav-list-link">Heatmap Colored Correlation Matrix</a></li><li class="nav-list-item"><a href="/Presentation/Figures/histograms.html" class="nav-list-link">Histograms</a></li><li class="nav-list-item"><a href="/Presentation/Figures/line_graph_with_labels_at_the_beginning_or_end.html" class="nav-list-link">Line Graph with Labels at the Beginning or End of Lines</a></li><li class="nav-list-item"><a href="/Presentation/Figures/line_graphs.html" class="nav-list-link">Line Graphs</a></li><li class="nav-list-item"><a href="/Presentation/Figures/marginal_effects_plots_for_interactions_with_categorical_variables.html" class="nav-list-link">Marginal effects plots for interactions with categorical variables</a></li><li class="nav-list-item"><a href="/Presentation/Figures/marginal_effects_plots_for_interactions_with_continuous_variables.html" class="nav-list-link">Marginal Effects Plots for Interactions with Continuous Variables</a></li><li class="nav-list-item"><a href="/Presentation/Figures/sankey_diagrams.html" class="nav-list-link">Sankey Diagrams</a></li><li class="nav-list-item"><a href="/Presentation/Figures/scatterplot_by_group_on_shared_axes.html" class="nav-list-link">Scatterplot by Group on Shared Axes</a></li><li class="nav-list-item"><a href="/Presentation/Figures/styling_line_graphs.html" class="nav-list-link">Styling Line Graphs</a></li><li class="nav-list-item"><a href="/Presentation/Figures/summary_graphs.html" class="nav-list-link">Graphing a By-Group or Over-Time Summary Statistic</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Tables category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Presentation/Tables/Tables.html" class="nav-list-link">Tables</a><ul class="nav-list"><li class="nav-list-item"><a href="/Presentation/Tables/Balance_Tables.html" class="nav-list-link">Balance Tables</a></li><li class="nav-list-item"><a href="/Presentation/Tables/Correlation_Matrix.html" class="nav-list-link">Correlation Matrix</a></li><li class="nav-list-item"><a href="/Presentation/Tables/Cross-Tabulation.html" class="nav-list-link">Cross-Tabulation</a></li><li class="nav-list-item"><a href="/Presentation/Tables/Custom_Tables.html" class="nav-list-link">Building Custom Tables</a></li><li class="nav-list-item"><a href="/Presentation/Tables/Regression_Tables.html" class="nav-list-link">Regression Tables</a></li><li class="nav-list-item"><a href="/Presentation/Tables/Summary_Statistics_Tables.html" class="nav-list-link">Summary Statistics Tables</a></li></ul></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Time Series category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Time_Series/Time_Series.html" class="nav-list-link">Time Series</a><ul class="nav-list"><li class="nav-list-item"><a href="/Time_Series/AR-models.html" class="nav-list-link">AR Models</a></li><li class="nav-list-item"><a href="/Time_Series/ARCH_Model.html" class="nav-list-link">ARCH Model</a></li><li class="nav-list-item"><a href="/Time_Series/ARIMA-models.html" class="nav-list-link">ARIMA Models</a></li><li class="nav-list-item"><a href="/Time_Series/ARMA-models.html" class="nav-list-link">ARMA Models</a></li><li class="nav-list-item"><a href="/Time_Series/Autocorrelation_Function.html" class="nav-list-link">Autocorrelation Function</a></li><li class="nav-list-item"><a href="/Time_Series/GARCH_Model.html" class="nav-list-link">GARCH Model</a></li><li class="nav-list-item"><a href="/Time_Series/Granger_Causality.html" class="nav-list-link">Granger Causality</a></li><li class="nav-list-item"><a href="/Time_Series/MA_Model.html" class="nav-list-link">MA Models</a></li><li class="nav-list-item"><a href="/Time_Series/Rolling_Regression.html" class="nav-list-link">Rolling Regression</a></li><li class="nav-list-item"><a href="/Time_Series/State_Space_Models.html" class="nav-list-link">State Space Models</a></li><li class="nav-list-item"><a href="/Time_Series/VAR-models.html" class="nav-list-link">VAR Models</a></li><li class="nav-list-item"><a href="/Time_Series/creating_time_series_dataset.html" class="nav-list-link">Creating a Time Series Dataset</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Other category" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/Other/Other.html" class="nav-list-link">Other</a><ul class="nav-list"><li class="nav-list-item"><a href="/Other/create_a_conda_package.html" class="nav-list-link">Create a Conda Package (Python)</a></li><li class="nav-list-item"><a href="/Other/get_a_list_of_files.html" class="nav-list-link">Get a List of Files</a></li><li class="nav-list-item"><a href="/Other/import_a_foreign_data_file.html" class="nav-list-link">Import a Foreign Data File</a></li><li class="nav-list-item"><a href="/Other/importing_delimited_files.html" class="nav-list-link">Import a Delimited Data File (CSV, TSV)</a></li><li class="nav-list-item"><a href="/Other/set_a_working_directory.html" class="nav-list-link">Set a Working Directory</a></li><li class="nav-list-item"><a href="/Other/simple_web_scrape.html" class="nav-list-link">Simple Web Scraping</a></li><li class="nav-list-item"><a href="/Other/task_scheduling_with_github_actions.html" class="nav-list-link">Task Scheduling with Github Actions</a></li></ul></li><li class="nav-list-item"><a href="/Desired_Nonexistent_Pages/desired_nonexistent_pages.html" class="nav-list-link">Desired Nonexistent Pages</a></li><li class="nav-list-item"><a href="/Contributing/Contributing.html" class="nav-list-link">Contributing</a></li><li class="nav-list-item"><a href="/" class="nav-list-link">Home</a></li></ul>
+</nav>
+    <footer class="site-footer">
+      This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+    </footer>
+</div>
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search LOST" aria-label="Search LOST" autocomplete="off">
+    <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+</div>
+    <div class="main-content-wrap">
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-nav-list">
+    <li class="breadcrumb-nav-list-item"><a href="/Model_Estimation/Model_Estimation.html">Model Estimation</a></li>
+    <li class="breadcrumb-nav-list-item"><a href="/Model_Estimation/Research_Design/Research_Design.html">Research Design</a></li>
+    <li class="breadcrumb-nav-list-item"><span>Difference in Differences Event Study</span></li>
+  </ol>
+</nav>
+      <div id="main-content" class="main-content">
+        <main>
+            <h1 id="difference-in-differences-event-study--dynamic-difference-in-differences">
+    <a href="#difference-in-differences-event-study--dynamic-difference-in-differences" class="anchor-heading" aria-labelledby="difference-in-differences-event-study--dynamic-difference-in-differences"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Difference-in-Differences Event Study / Dynamic Difference-in-Differences
+</h1>
+<p>A Difference-in-Difference (DID) event study, or a Dynamic DID model, is a useful tool in evaluating treatment effects of the pre- and post- treatment periods in your respective study. However, since treatment can be staggered — where the treatment group are treated at different time periods — it might be challenging to create a clean event study. We will try to address these issues explicitly in the implementation examples that follow.</p>
+<p><strong>Important:</strong> The dataset used for the implementation examples on this page derives from a staggered treatment (“rollout”) design. Various studies have shone a light on the potential biases that can result from applying a standard, twoway fixed-effect (TWFE) regression estimator on such a staggered setup, including <a href="https://www.sciencedirect.com/science/article/pii/S030440762030378X">Sun and Abraham (2020)</a>, <a href="https://www.sciencedirect.com/science/article/pii/S0304407621001445#b18">Callaway and Sant’Anna (2020)</a>, and <a href="https://www.sciencedirect.com/science/article/pii/S0304407621001445">Goodman-Bacon (2021)</a>. Where possible, we will highlight these issues and provide code examples that addresses the potential baises. Note that in cases where the rollout is <em>not</em> staggered (i.e. there is only one treatment period), the same approaches can be applied without loss.</p>
+<p>The regression that DID event studies are based aroud is:</p>
+\[Y_{gt} = \alpha + \Sigma_{k=T_0}^{-2}\beta_k\times treat_{gk}+\Sigma_{k=0}^{T_1}\beta_k\times treat_{gk}+ X_{st}\Gamma+\phi_s+\gamma_t+\epsilon_{gt}\]
+<p>Where:</p>
+<ul>
+  <li>
+    <p>\(treat_{sk}\) is a dummy variable, equaling 1 if the observation’s periods relative to the group \(g\)’s first treated period is the same value as <code class="language-plaintext highlighter-rouge">k</code>; 0 otherwise (and 0 for all never-treated groups).</p>
+  </li>
+  <li>
+    <p>\(T_0\) and \(T_1\) are the lowest and highest number of leads and lags to consider surrouning the treatment period, respectively.</p>
+  </li>
+  <li>
+    <p>\(X`\) are controls</p>
+  </li>
+  <li>
+    <p>\(\phi\) and \(\gamma\) are state and time fixed effects</p>
+  </li>
+  <li>
+    <p>Estimation is generally performed with standard errors clustered at the group level</p>
+  </li>
+</ul>
+<p>Important notes on the regression:</p>
+<ul>
+  <li>
+    <p>The point of the regression is to show for each period before and after treatment that the coefficients on the pre-treated periods are statistically insignificant</p>
+  </li>
+  <li>
+    <p>Showing the control and treated groups are statistically the same before treatment (\(\beta_k=0\) for \(k &lt; 0\)) supports, though does not prove, the parallel trends assumption in DID estimation.</p>
+  </li>
+  <li>
+    <p>One of the time periods must be dropped to avoid perfect multicollinearity (as in most fixed-effects setups). In most event studies, the -1 time lag is used as the dropped reference.</p>
+  </li>
+</ul>
+<h2 id="keep-in-mind">
+    <a href="#keep-in-mind" class="anchor-heading" aria-labelledby="keep-in-mind"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Keep in Mind
+</h2>
+<p>Mechanically, an event study is a graphical illustration of the point estimates and confidence intervals of the regression for each time period before and after the treatment period. It’s especially relevant in the DID environment as the point estimates are the average mean differences between the treated and control groups, which provides further evidence of the credibility in assuming parallel trends.</p>
+<h2 id="also-consider">
+    <a href="#also-consider" class="anchor-heading" aria-labelledby="also-consider"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Also Consider
+</h2>
+<ul>
+  <li><a href="/Model_Estimation/Research_Design/two_by_two_difference_in_difference.html">2x2 Difference-in-Differences</a></li>
+  <li>A great resource for learning more about DID and event study theory is at <a href="https://mixtape.scunning.com/difference-in-differences.html#providing-evidence-for-parallel-trends-through-event-studies-and-parallel-leads">Causal Inference: The Mixtape</a>.</li>
+</ul>
+<h1 id="implementations">
+    <a href="#implementations" class="anchor-heading" aria-labelledby="implementations"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Implementations
+</h1>
+<p>All implementations use the same data, which comes from <a href="http://users.nber.org/~jwolfers/papers/bargaining_in_the_shadow_of_the_law.pdf">Stevenson and Wolfers (2006)</a> by way of <a href="http://ftp.iza.org/dp13524.pdf">Clarke &amp; Schythe (2020)</a>, who use it as an example to demonstrate Goodman-Bacon effects. This data is a balanced panel from 1964 through 1996 of the United States no-fault divorce reforms and female suicide rates. You can directly download the data <a href="http://www.damianclarke.net/stata/bacon_example.dta">here</a>.</p>
+<p>Column <code class="language-plaintext highlighter-rouge">_nfd</code> in the data  specifies the year in which the law went into effect for the respective state. We use this column to identify the lead and lags with respect to year of treatment. <code class="language-plaintext highlighter-rouge">pcinc</code>, <code class="language-plaintext highlighter-rouge">asmrh</code>, and <code class="language-plaintext highlighter-rouge">cases</code> are controls. Again, it is important to emphasise that treatment (i.e. when the law went into effect for each state) is staggered over time.</p>
+<p>Note that there are some states in which <code class="language-plaintext highlighter-rouge">_nfd</code> is empty. These states never received treatment, and thus exist as a control.</p>
+<h2 id="python">
+    <a href="#python" class="anchor-heading" aria-labelledby="python"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Python
+</h2>
+<p>Python makes dealing with lots of interaction terms like we have here a little painful, but we can iterate to do a lot of the work for us.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">linearmodels</span> <span class="k">as</span> <span class="n">lm</span>
+
+<span class="c1"># Read in data
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"https://raw.githubusercontent.com/LOST-STATS/LOST-STATS.github.io/master/Model_Estimation/Data/Event_Study_DiD/bacon_example.csv"</span><span class="p">)</span>
+
+<span class="c1"># create the lag/lead for treated states
+# fill in control obs with 0
+# This allows for the interaction between `treat` and `time_to_treat` to occur for each state.
+# Otherwise, there may be some missingss and the estimations will be off.
+</span><span class="n">df</span><span class="p">[</span><span class="s">'time_to_treat'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s">'year'</span><span class="p">].</span><span class="n">sub</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'_nfd'</span><span class="p">])</span>
+        <span class="c1"># missing values for _nfd implies no treatment
+</span>        <span class="p">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># so we don't have decimals in our factor names
+</span>        <span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'int'</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Create our interactions by hand,
+# skipping -1, the last one before treatment
+</span>
+<span class="n">df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="c1"># returns dataframe with dummy columns in place of the columns
+</span>    <span class="c1"># in the named argument, all other columns untouched
+</span>    <span class="n">pd</span><span class="p">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'time_to_treat'</span><span class="p">],</span> <span class="n">prefix</span><span class="o">=</span><span class="s">'INX'</span><span class="p">)</span>
+      <span class="c1"># Be sure not to include the minuses in the name
+</span>      <span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'-'</span><span class="p">,</span> <span class="s">'m'</span><span class="p">))</span>
+      <span class="c1"># get_dummies has a `drop_first` argument, but if we want to
+</span>      <span class="c1"># refer to a specific level, we should return all levels and
+</span>      <span class="c1"># drop out reference column manually
+</span>      <span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s">'INX_m1'</span><span class="p">)</span>
+      <span class="c1"># Set our individual and time (index) for our data
+</span>      <span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'stfips'</span><span class="p">,</span> <span class="s">'year'</span><span class="p">])</span>
+<span class="p">)</span>
+
+<span class="c1"># Estimate the regression
+</span>
+<span class="n">scalars</span> <span class="o">=</span> <span class="p">[</span><span class="s">'pcinc'</span><span class="p">,</span> <span class="s">'asmrh'</span><span class="p">,</span> <span class="s">'cases'</span><span class="p">]</span>
+<span class="n">factors</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">[</span><span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="nb">str</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="s">'INX'</span><span class="p">)]</span>
+<span class="n">exog</span> <span class="o">=</span> <span class="n">factors</span><span class="p">.</span><span class="n">union</span><span class="p">(</span><span class="n">scalars</span><span class="p">)</span>
+<span class="n">endog</span> <span class="o">=</span> <span class="s">'asmrs'</span>
+
+<span class="c1"># with the standard api:
+</span><span class="n">mod</span> <span class="o">=</span> <span class="n">lm</span><span class="p">.</span><span class="n">PanelOLS</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">endog</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">exog</span><span class="p">],</span> <span class="n">entity_effects</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">time_effects</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">fit</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cov_type</span><span class="o">=</span><span class="s">'clustered'</span><span class="p">,</span> <span class="n">cluster_entity</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">fit</span><span class="p">.</span><span class="n">summary</span>
+
+<span class="c1"># with the formula api:
+# We can save ourselves some time by creating the regression formula automatically
+</span><span class="n">inxnames</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="n">df</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="s">'{} ~ {} + EntityEffects + TimeEffects'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">endog</span><span class="p">,</span> <span class="s">'+'</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">exog</span><span class="p">))</span>
+
+<span class="n">mod</span> <span class="o">=</span> <span class="n">lm</span><span class="p">.</span><span class="n">PanelOLS</span><span class="p">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Specify clustering when we fit the model
+</span><span class="n">clfe</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s">'clustered'</span><span class="p">,</span>
+    <span class="n">cluster_entity</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Look at regression results
+</span><span class="n">clfe</span><span class="p">.</span><span class="n">summary</span>
+</code></pre></div></div>
+<p>Now we can plot the results with <strong>matplotlib</strong>. Two common approaches are to include vertical-line confidence intervals with <code class="language-plaintext highlighter-rouge">errorbar()</code> or to include a confidence interval ribbon with <code class="language-plaintext highlighter-rouge">fill_between()</code>. I’ll show the <code class="language-plaintext highlighter-rouge">errorbar()</code> version.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get coefficients and CIs
+</span><span class="n">res</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">clfe</span><span class="p">.</span><span class="n">params</span><span class="p">,</span> <span class="n">clfe</span><span class="p">.</span><span class="n">std_errors</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Scale standard error to 95% CI
+</span><span class="n">res</span><span class="p">[</span><span class="s">'ci'</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s">'std_error'</span><span class="p">]</span><span class="o">*</span><span class="mf">1.96</span>
+
+<span class="c1"># We only want time interactions
+</span><span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">like</span><span class="o">=</span><span class="s">'INX'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Turn the coefficient names back to numbers
+</span><span class="n">res</span><span class="p">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">res</span><span class="p">.</span><span class="n">index</span>
+        <span class="p">.</span><span class="nb">str</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'INX_'</span><span class="p">,</span> <span class="s">''</span><span class="p">)</span>
+        <span class="p">.</span><span class="nb">str</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'m'</span><span class="p">,</span> <span class="s">'-'</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'int'</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="s">'time_to_treat'</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># And add our reference period back in, and sort automatically
+</span><span class="n">res</span><span class="p">.</span><span class="n">reindex</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">index</span><span class="p">.</span><span class="nb">min</span><span class="p">(),</span> <span class="n">res</span><span class="p">.</span><span class="n">index</span><span class="p">.</span><span class="nb">max</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="p">)).</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Plot the estimates as connected lines with error bars
+</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">y</span><span class="o">=</span><span class="s">'parameter'</span><span class="p">,</span>
+    <span class="n">yerr</span><span class="o">=</span><span class="s">'ci'</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s">'Time to Treatment'</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s">'Estimated Effect'</span><span class="p">,</span>
+    <span class="n">legend</span><span class="o">=</span><span class="bp">False</span>
+<span class="p">)</span>
+<span class="c1"># Add a horizontal line at 0
+</span><span class="n">ax</span><span class="p">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s">'dashed'</span><span class="p">)</span>
+<span class="c1"># And a vertical line at the treatment time
+# some versions of pandas have bug return x-axis object with data_interval
+# starting at 0. In that case change 0 to 21
+</span><span class="n">ax</span><span class="p">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s">'dashed'</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Which produces:</p>
+<p><img src="/Model_Estimation/Images/Event_Study/py_did_event_study.png" alt="DID Event Study Graph in Python" /></p>
+<p>Of course, as earlier mentioned, this analysis is subject to the critique by Sun and Abraham (2020). You want to calculate effects separately by time-when-treated, and then aggregate to the time-to-treatment level properly, avoiding the way these estimates can “contaminate” each other in the regular model. You are on your own for this process in Python, though. Read the paper (and the back-end code from the R or Stata implementations listed below).</p>
+<h2 id="r">
+    <a href="#r" class="anchor-heading" aria-labelledby="r"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> R
+</h2>
+<p>A variety of R packages can be used to conduct event-study DiD analysis. Here we will use <strong>fixest</strong>, which is both extremely fast and provides several convenience features (including ES graphics and implementation of the Sun-Abraham method). Note that we are using version 0.9.0 of <strong>fixest</strong>.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">data.table</span><span class="p">)</span><span class="w"> </span><span class="c1">## For some minor data wrangling</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">fixest</span><span class="p">)</span><span class="w">     </span><span class="c1">## NB: Requires version &gt;=0.9.0</span><span class="w">
+
+</span><span class="c1"># Load and prepare data</span><span class="w">
+</span><span class="n">dat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fread</span><span class="p">(</span><span class="s2">"https://raw.githubusercontent.com/LOST-STATS/LOST-STATS.github.io/master/Model_Estimation/Data/Event_Study_DiD/bacon_example.csv"</span><span class="p">)</span><span class="w"> 
+
+</span><span class="c1"># Let's create a more user-friendly indicator of which states received treatment</span><span class="w">
+</span><span class="n">dat</span><span class="p">[,</span><span class="w"> </span><span class="n">treat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">`_nfd`</span><span class="p">),</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)]</span><span class="w">
+
+</span><span class="c1"># Create a "time_to_treatment" variable for each state, so that treatment is</span><span class="w">
+</span><span class="c1"># relative for all treated units. For the never-treated (i.e. control) units,</span><span class="w">
+</span><span class="c1"># we'll arbitrarily set the "time_to_treatment" value at 0. This value </span><span class="w">
+</span><span class="c1"># doesn't really matter, since it will be canceled by the treat==0 interaction</span><span class="w">
+</span><span class="c1"># anyway. But we do want to make sure they aren't NA, otherwise feols would drop </span><span class="w">
+</span><span class="c1"># these never-treated observations at estimation time and our results will be </span><span class="w">
+</span><span class="c1"># off.</span><span class="w">
+</span><span class="n">dat</span><span class="p">[,</span><span class="w"> </span><span class="n">time_to_treat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">treat</span><span class="o">==</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">year</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">`_nfd`</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)]</span><span class="w">
+</span></code></pre></div></div>
+<p>Let’s run our event study model. Again, we’ll be using <code class="language-plaintext highlighter-rouge">fixest::feols()</code> to do so. Note that the key time × treatment interaction takes place via the special <code class="language-plaintext highlighter-rouge">i()</code> operator. In the below case, we are essentially implementing a standard two-way fixed-effects (TWFE) procedure. We’ll also specify state+year fixed effects and explicitly cluster the standard errors at the state level (although this would be done by default).</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mod_twfe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feols</span><span class="p">(</span><span class="n">asmrs</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">i</span><span class="p">(</span><span class="n">time_to_treat</span><span class="p">,</span><span class="w"> </span><span class="n">treat</span><span class="p">,</span><span class="w"> </span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="c1">## Our key interaction: time × treatment status</span><span class="w">
+		  </span><span class="n">pcinc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">asmrh</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cases</span><span class="w"> </span><span class="o">|</span><span class="w">                    </span><span class="c1">## Other controls</span><span class="w">
+		  </span><span class="n">stfips</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">year</span><span class="p">,</span><span class="w">                             </span><span class="c1">## FEs</span><span class="w">
+		 </span><span class="n">cluster</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="n">stfips</span><span class="p">,</span><span class="w">                          </span><span class="c1">## Clustered SEs</span><span class="w">
+		 </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dat</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>While it’s relatively straightforward to convert this model object into a data frame and then plot manually using <strong>ggplot2</strong>, this is more work than we need to do here. Specifically, <strong>fixest</strong> provides a convenient <code class="language-plaintext highlighter-rouge">iplot()</code> function for plotting the interaction term coefficients from a model. The resulting plot can be heavily customized, but for event-study designs it generally does exactly what you’d want out of the box.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iplot</span><span class="p">(</span><span class="n">mod_twfe</span><span class="p">,</span><span class="w"> 
+      </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Time to treatment'</span><span class="p">,</span><span class="w">
+      </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Event study: Staggered treatment (TWFE)'</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>This results in:</p>
+<p><img src="/Model_Estimation/Images/Event_Study/r-es_twfe.png" alt="TWFE DiD Event Study Graph in R" /></p>
+<p>As earlier mentioned, the standard TWFE approach to event studies is subject to various problems in the presence of staggered treatment rollout. Fortunately, <strong>fixest</strong> provides the <code class="language-plaintext highlighter-rouge">sunab()</code> convenience function for estimating the aggregated “cohort” method proposed by Sun and Abraham (2020). In the below example, the only material change is to swap out the <code class="language-plaintext highlighter-rouge">i()</code> interaction with the <code class="language-plaintext highlighter-rouge">sunab()</code> equivalent.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Following Sun and Abraham, we give our never-treated units a fake "treatment"</span><span class="w">
+</span><span class="c1"># date far outside the relevant study period.</span><span class="w">
+</span><span class="n">dat</span><span class="p">[,</span><span class="w"> </span><span class="n">year_treated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">treat</span><span class="o">==</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">10000</span><span class="p">,</span><span class="w"> </span><span class="n">`_nfd`</span><span class="p">)]</span><span class="w">
+
+</span><span class="c1"># Now we re-run our model from earlier, but this time swapping out </span><span class="w">
+</span><span class="c1"># `i(time_to_treat, treat, ref = -1)` for `sunab(year_treated, year)`.</span><span class="w">
+</span><span class="c1"># See `?sunab`.</span><span class="w">
+</span><span class="n">mod_sa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feols</span><span class="p">(</span><span class="n">asmrs</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">sunab</span><span class="p">(</span><span class="n">year_treated</span><span class="p">,</span><span class="w"> </span><span class="n">year</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="c1">## The only thing that's changed</span><span class="w">
+	        </span><span class="n">pcinc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">asmrh</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cases</span><span class="w"> </span><span class="o">|</span><span class="w">
+		</span><span class="n">stfips</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">year</span><span class="p">,</span><span class="w">
+	       </span><span class="n">cluster</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="n">stfips</span><span class="p">,</span><span class="w">
+	       </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dat</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>Again, we can use <code class="language-plaintext highlighter-rouge">iplot()</code> to depict the resulting event study in graphical form. In this case, we’ll plot both the new Sun-Abraham mode results and the previous (naive) TWFE model results</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iplot</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">mod_twfe</span><span class="p">,</span><span class="w"> </span><span class="n">mod_sa</span><span class="p">),</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">ref.line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-1</span><span class="p">,</span><span class="w">
+      </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Time to treatment'</span><span class="p">,</span><span class="w">
+      </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Event study: Staggered treatment'</span><span class="p">)</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"bottomleft"</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">17</span><span class="p">),</span><span class="w"> 
+       </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"TWFE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sun &amp; Abraham (2020)"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="/Model_Estimation/Images/Event_Study/r-es_sunab.png" alt="SA DiD Event Study Graph in R" /></p>
+<h2 id="stata">
+    <a href="#stata" class="anchor-heading" aria-labelledby="stata"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Stata
+</h2>
+<p>We can use the <strong>reghdfe</strong> package to help with our two-way fixed effects and high-dimensional data. Install with <code class="language-plaintext highlighter-rouge">ssc install reghdfe</code> first if you don’t have it.</p>
+<div class="language-stata highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">use</span> <span class="s2">"https://raw.githubusercontent.com/LOST-STATS/LOST-STATS.github.io/master/Model_Estimation/Data/Event_Study_DiD/bacon_example.dta"</span><span class="err">,</span> <span class="err">clear
+</span><span class="c1">
+* create the lag/lead for treated states
+* fill in control obs with 0
+* This allows for the interaction between `treat` and `time_to_treat` to occur for each state.
+* Otherwise, there may be some NAs and the estimations will be off.
+</span><span class="err">g</span> <span class="err">time_to_treat</span> <span class="o">=</span> <span class="err">year</span> <span class="o">-</span> <span class="err">_nfd
+replace</span> <span class="err">time_to_treat</span> <span class="o">=</span> <span class="err">0</span> <span class="err">if</span> <span class="err">missing(_nfd)
+</span><span class="c1">* this will determine the difference
+* btw controls and treated states
+</span><span class="err">g</span> <span class="err">treat</span> <span class="o">=</span> <span class="o">!</span><span class="err">missing(_nfd)
+</span><span class="c1">
+* Stata won't allow factors with negative values, so let's shift
+* time-to-treat to start at 0, keeping track of where the true -1 is
+</span><span class="err">summ</span> <span class="err">time_to_treat
+g</span> <span class="err">shifted_ttt</span> <span class="o">=</span> <span class="err">time_to_treat</span> <span class="o">-</span> <span class="err">r(min)
+summ</span> <span class="err">shifted_ttt</span> <span class="err">if</span> <span class="err">time_to_treat</span> <span class="o">==</span> <span class="o">-</span><span class="err">1
+local</span> <span class="err">true_neg1</span> <span class="o">=</span> <span class="err">r(mean)
+</span><span class="c1">
+* Regress on our interaction terms with FEs for group and year,
+* clustering at the group (state) level
+* use ib# to specify our reference group
+</span><span class="err">reghdfe</span> <span class="err">asmrs</span> <span class="err">ib</span><span class="p">`</span><span class="si">true_neg1</span><span class="p">'</span><span class="err">.shifted_ttt</span> <span class="err">pcinc</span> <span class="err">asmrh</span> <span class="err">cases,</span> <span class="err">a(stfips</span> <span class="err">year)</span> <span class="err">vce(cluster</span> <span class="err">stfips)
+</span></code></pre></div></div>
+<p>Now we can plot.</p>
+<div class="language-stata highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">* Pull out the coefficients and SEs
+</span><span class="err">g</span> <span class="err">coef</span> <span class="o">=</span> <span class="err">.
+g</span> <span class="err">se</span> <span class="o">=</span> <span class="err">.
+levelsof</span> <span class="err">shifted_ttt,</span> <span class="err">l(times)
+foreach</span> <span class="err">t</span> <span class="err">in</span> <span class="p">`</span><span class="si">times</span><span class="p">'</span> <span class="err">{
+</span>	<span class="err">replace</span> <span class="err">coef</span> <span class="o">=</span> <span class="err">_b[</span><span class="p">`</span><span class="si">t'.shifted_ttt] if shifted_ttt == `t</span><span class="p">'</span><span class="err">
+</span>	<span class="err">replace</span> <span class="err">se</span> <span class="o">=</span> <span class="err">_se[</span><span class="p">`</span><span class="si">t'.shifted_ttt] if shifted_ttt == `t</span><span class="p">'</span><span class="err">
+}
+</span><span class="c1">
+* Make confidence intervals
+</span><span class="err">g</span> <span class="err">ci_top</span> <span class="o">=</span> <span class="err">coef</span><span class="o">+</span><span class="err">1.96</span><span class="o">*</span><span class="err">se
+g</span> <span class="err">ci_bottom</span> <span class="o">=</span> <span class="err">coef</span> <span class="o">-</span> <span class="err">1.96</span><span class="o">*</span><span class="err">se
+</span><span class="c1">
+* Limit ourselves to one observation per quarter
+* now switch back to time_to_treat to get original timing
+</span><span class="err">keep</span> <span class="err">time_to_treat</span> <span class="err">coef</span> <span class="err">se</span> <span class="err">ci_</span><span class="o">*</span><span class="err">
+duplicates</span> <span class="err">drop
+
+sort</span> <span class="err">time_to_treat
+</span><span class="c1">
+* Create connected scatterplot of coefficients
+* with CIs included with rcap
+* and a line at 0 both horizontally and vertically
+</span><span class="err">summ</span> <span class="err">ci_top
+local</span> <span class="err">top_range</span> <span class="o">=</span> <span class="err">r(max)
+summ</span> <span class="err">ci_bottom
+local</span> <span class="err">bottom_range</span> <span class="o">=</span> <span class="err">r(min)
+
+twoway</span> <span class="err">(sc</span> <span class="err">coef</span> <span class="err">time_to_treat,</span> <span class="err">connect(line))</span> <span class="c1">///</span><span class="err">
+</span>	<span class="err">(rcap</span> <span class="err">ci_top</span> <span class="err">ci_bottom</span> <span class="err">time_to_treat)</span>	<span class="c1">///</span><span class="err">
+</span>	<span class="err">(function</span> <span class="err">y</span> <span class="o">=</span> <span class="err">0,</span> <span class="err">range(time_to_treat))</span> <span class="c1">///</span><span class="err">
+</span>	<span class="err">(function</span> <span class="err">y</span> <span class="o">=</span> <span class="err">0,</span> <span class="err">range(</span><span class="p">`</span><span class="si">bottom_range' `top_range</span><span class="p">'</span><span class="err">)</span> <span class="err">horiz),</span> <span class="c1">///</span><span class="err">
+</span>	<span class="err">xtitle(</span><span class="s2">"Time to Treatment"</span><span class="err">)</span> <span class="err">caption(</span><span class="s2">"95% Confidence Intervals Shown"</span><span class="err">)
+</span></code></pre></div></div>
+<p>Which produces:</p>
+<p><img src="/Model_Estimation/Images/Event_Study/stata_did_event_study.png" alt="DID Event Study Graph in Stata" /></p>
+<p>Any further decoration or theming at that point is up to you.</p>
+<p>Of course, as earlier mentioned, this analysis is subject to the critique by Sun and Abraham (2020). We can estimate the Sun and Abraham method using the <strong>eventstudyinteract</strong> command in Stata. Install by installing the <strong>github</strong> package with <code class="language-plaintext highlighter-rouge">net install github, from("https://haghish.github.io/github/")</code> and then installing <strong>eventstudyinteract</strong> with <code class="language-plaintext highlighter-rouge">github install lsun20/eventstudyinteract</code>.</p>
+<p>See <code class="language-plaintext highlighter-rouge">help eventstudyinteract</code> for more information.</p>
+<div class="language-stata highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">* Reload our data since we squashed it to graph
+</span><span class="err">use</span> <span class="s2">"https://raw.githubusercontent.com/LOST-STATS/LOST-STATS.github.io/master/Model_Estimation/Data/Event_Study_DiD/bacon_example.dta"</span><span class="err">,</span> <span class="err">clear
+</span><span class="c1">
+* create the lag/lead for treated states
+* fill in control obs with 0
+* This allows for the interaction between `treat` and `time_to_treat` to occur for each state.
+* Otherwise, there may be some NAs and the estimations will be off.
+</span><span class="err">g</span> <span class="err">time_to_treat</span> <span class="o">=</span> <span class="err">year</span> <span class="o">-</span> <span class="err">_nfd
+replace</span> <span class="err">time_to_treat</span> <span class="o">=</span> <span class="err">0</span> <span class="err">if</span> <span class="err">missing(_nfd)
+</span><span class="c1">* this will determine the difference
+* btw controls and treated states
+</span><span class="err">g</span> <span class="err">treat</span> <span class="o">=</span> <span class="o">!</span><span class="err">missing(_nfd)
+g</span> <span class="err">never_treat</span> <span class="o">=</span> <span class="err">missing(_nfd)
+</span><span class="c1">
+
+* Create relative-time indicators for treated groups by hand
+* ignore distant leads and lags due to lack of observations
+* (note this assumes any effects outside these leads/lags is 0)
+</span><span class="err">tab</span> <span class="err">time_to_treat
+forvalues</span> <span class="err">t</span> <span class="o">=</span> <span class="o">-</span><span class="err">9(1)16</span> <span class="err">{
+</span>	<span class="err">if</span> <span class="p">`</span><span class="si">t</span><span class="p">'</span> <span class="o">&lt;</span> <span class="o">-</span><span class="err">1</span> <span class="err">{
+</span>		<span class="err">local</span> <span class="err">tname</span> <span class="o">=</span> <span class="err">abs(</span><span class="p">`</span><span class="si">t</span><span class="p">'</span><span class="err">)
+</span>		<span class="err">g</span> <span class="err">g_m</span><span class="p">`</span><span class="si">tname' = time_to_treat == `t</span><span class="p">'</span><span class="err">
+</span>	<span class="err">}
+</span>	<span class="err">else</span> <span class="err">if</span> <span class="p">`</span><span class="si">t</span><span class="p">'</span> <span class="o">&gt;=</span> <span class="err">0</span> <span class="err">{
+</span>		<span class="err">g</span> <span class="err">g_</span><span class="p">`</span><span class="si">t' = time_to_treat == `t</span><span class="p">'</span><span class="err">
+</span>	<span class="err">}
+}
+
+eventstudyinteract</span> <span class="err">asmrs</span> <span class="err">g_</span><span class="o">*</span><span class="err">,</span> <span class="err">cohort(_nfd)</span> <span class="err">control_cohort(never_treat)</span> <span class="err">covariates(pcinc</span> <span class="err">asmrh</span> <span class="err">cases)</span> <span class="err">absorb(i.stfips</span> <span class="err">i.year)</span> <span class="err">vce(cluster</span> <span class="err">stfips)
+</span><span class="c1">
+* Get effects and plot
+* as of this writing, the coefficient matrix is unlabeled and so we can't do _b[] and _se[]
+* instead we'll work with the results table
+</span><span class="err">matrix</span> <span class="err">T</span> <span class="o">=</span> <span class="err">r(table)
+g</span> <span class="err">coef</span> <span class="o">=</span> <span class="err">0</span> <span class="err">if</span> <span class="err">time_to_treat</span> <span class="o">==</span> <span class="o">-</span><span class="err">1
+g</span> <span class="err">se</span> <span class="o">=</span> <span class="err">0</span> <span class="err">if</span> <span class="err">time_to_treat</span> <span class="o">==</span> <span class="o">-</span><span class="err">1
+forvalues</span> <span class="err">t</span> <span class="o">=</span> <span class="o">-</span><span class="err">9(1)16</span> <span class="err">{
+</span>	<span class="err">if</span> <span class="p">`</span><span class="si">t</span><span class="p">'</span> <span class="o">&lt;</span> <span class="o">-</span><span class="err">1</span> <span class="err">{
+</span>		<span class="err">local</span> <span class="err">tname</span> <span class="o">=</span> <span class="err">abs(</span><span class="p">`</span><span class="si">t</span><span class="p">'</span><span class="err">)
+</span>		<span class="err">replace</span> <span class="err">coef</span> <span class="o">=</span> <span class="err">T[1,colnumb(T,</span><span class="s2">"g_m`tname'"</span><span class="err">)]</span> <span class="err">if</span> <span class="err">time_to_treat</span> <span class="o">==</span> <span class="p">`</span><span class="si">t</span><span class="p">'</span><span class="err">
+</span>		<span class="err">replace</span> <span class="err">se</span> <span class="o">=</span> <span class="err">T[2,colnumb(T,</span><span class="s2">"g_m`tname'"</span><span class="err">)]</span> <span class="err">if</span> <span class="err">time_to_treat</span> <span class="o">==</span> <span class="p">`</span><span class="si">t</span><span class="p">'</span><span class="err">
+</span>	<span class="err">}
+</span>	<span class="err">else</span> <span class="err">if</span> <span class="p">`</span><span class="si">t</span><span class="p">'</span> <span class="o">&gt;=</span> <span class="err">0</span> <span class="err">{
+</span>		<span class="err">replace</span> <span class="err">coef</span> <span class="o">=</span>  <span class="err">T[1,colnumb(T,</span><span class="s2">"g_`t'"</span><span class="err">)]</span> <span class="err">if</span> <span class="err">time_to_treat</span> <span class="o">==</span> <span class="p">`</span><span class="si">t</span><span class="p">'</span><span class="err">
+</span>		<span class="err">replace</span> <span class="err">se</span> <span class="o">=</span> <span class="err">T[2,colnumb(T,</span><span class="s2">"g_`t'"</span><span class="err">)]</span> <span class="err">if</span> <span class="err">time_to_treat</span> <span class="o">==</span> <span class="p">`</span><span class="si">t</span><span class="p">'</span><span class="err">
+</span>	<span class="err">}
+}
+</span><span class="c1">
+* Make confidence intervals
+</span><span class="err">g</span> <span class="err">ci_top</span> <span class="o">=</span> <span class="err">coef</span><span class="o">+</span><span class="err">1.96</span><span class="o">*</span><span class="err">se
+g</span> <span class="err">ci_bottom</span> <span class="o">=</span> <span class="err">coef</span> <span class="o">-</span> <span class="err">1.96</span><span class="o">*</span><span class="err">se
+
+keep</span> <span class="err">time_to_treat</span> <span class="err">coef</span> <span class="err">se</span> <span class="err">ci_</span><span class="o">*</span><span class="err">
+duplicates</span> <span class="err">drop
+
+sort</span> <span class="err">time_to_treat
+keep</span> <span class="err">if</span> <span class="err">inrange(time_to_treat,</span> <span class="o">-</span><span class="err">9,</span> <span class="err">16)
+</span><span class="c1">
+* Create connected scatterplot of coefficients
+* with CIs included with rcap
+* and a line at 0 both horizontally and vertically
+</span><span class="err">summ</span> <span class="err">ci_top
+local</span> <span class="err">top_range</span> <span class="o">=</span> <span class="err">r(max)
+summ</span> <span class="err">ci_bottom
+local</span> <span class="err">bottom_range</span> <span class="o">=</span> <span class="err">r(min)
+
+twoway</span> <span class="err">(sc</span> <span class="err">coef</span> <span class="err">time_to_treat,</span> <span class="err">connect(line))</span> <span class="c1">///</span><span class="err">
+</span>	<span class="err">(rcap</span> <span class="err">ci_top</span> <span class="err">ci_bottom</span> <span class="err">time_to_treat)</span>	<span class="c1">///</span><span class="err">
+</span>	<span class="err">(function</span> <span class="err">y</span> <span class="o">=</span> <span class="err">0,</span> <span class="err">range(time_to_treat))</span> <span class="c1">///</span><span class="err">
+</span>	<span class="err">(function</span> <span class="err">y</span> <span class="o">=</span> <span class="err">0,</span> <span class="err">range(</span><span class="p">`</span><span class="si">bottom_range' `top_range</span><span class="p">'</span><span class="err">)</span> <span class="err">horiz),</span> <span class="c1">///</span><span class="err">
+</span>	<span class="err">xtitle(</span><span class="s2">"Time to Treatment with Sun and Abraham (2020) Estimation"</span><span class="err">)</span> <span class="err">caption(</span><span class="s2">"95% Confidence Intervals Shown"</span><span class="err">)
+</span></code></pre></div></div>
+        </main>
+  <hr>
+  <footer>
+      <div class="d-flex mt-2">
+          <p class="text-small text-grey-dk-000 mb-0">
+            <a href="https://github.com/lost-stats/lost-stats.github.io/edit/source/Model_Estimation/Research_Design/event_study.md" id="edit-this-page">Edit this page on GitHub.</a>
+          </p>
+      </div>
+  </footer>
+      </div>
+    </div>
+<div class="search-overlay"></div>
+  </div>
+</body>
+</html>
